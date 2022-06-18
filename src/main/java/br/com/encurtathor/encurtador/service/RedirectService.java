@@ -2,6 +2,7 @@ package br.com.encurtathor.encurtador.service;
 
 import br.com.encurtathor.encurtador.dto.RedirectCreationRequest;
 import br.com.encurtathor.encurtador.entity.Redirects;
+import br.com.encurtathor.encurtador.exception.BadRequestException;
 import br.com.encurtathor.encurtador.repository.RedirectsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;

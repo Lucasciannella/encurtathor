@@ -1,6 +1,7 @@
 package br.com.encurtathor.encurtador.controller;
 
 import br.com.encurtathor.encurtador.dto.RedirectCreationRequest;
+import br.com.encurtathor.encurtador.entity.Redirects;
 import br.com.encurtathor.encurtador.service.RedirectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +23,8 @@ public class RedirectController {
 
     @GetMapping("/{hash}")
     public ResponseEntity<?> getRedirect(String hash) throws URISyntaxException {
-        URI uri = new URI(Endpoints.getURl());
+        Redirects redirect=redirectService.getRedirect(hash);
+        URI uri = new URI(redirect.getHash());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(uri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
