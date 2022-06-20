@@ -3,9 +3,9 @@ package br.com.encurtathor.encurtador.service;
 import br.com.encurtathor.encurtador.dto.RedirectCreationRequest;
 import br.com.encurtathor.encurtador.entity.Redirects;
 import br.com.encurtathor.encurtador.exception.BadRequestException;
+import br.com.encurtathor.encurtador.exception.NotFoundException;
 import br.com.encurtathor.encurtador.repository.RedirectsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,13 +18,13 @@ public class RedirectService {
     private final RedirectsRepository redirectsReposytory;
 
     public Redirects getRedirect(String hash) {
-        Redirects redirect = redirectsReposytory.findByHash(hash).orElseThrow(() -> new ChangeSetPersister.NotFoundException("Don't have hash, try make do it"));
+        Redirects redirect = redirectsReposytory.findByHash(hash).orElseThrow(() -> new NotFoundException("Don't have hash, try make do it"));
 
         return redirect;
     }
 
     public Optional<Redirects> createRedirect(RedirectCreationRequest redirectCreationRequest) {
-        if (redirectsReposytory.existedByHash(redirectCreationRequest.getHash())) {
+        if (redirectsReposytory.existsByHash(redirectCreationRequest.getHash())) {
             throw new BadRequestException("Hash Alredy exists");
         }
         Redirects redirect = Redirects.builder()

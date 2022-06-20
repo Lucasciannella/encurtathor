@@ -7,11 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -22,9 +20,9 @@ public class RedirectController {
     private final RedirectService redirectService;
 
     @GetMapping("/{hash}")
-    public ResponseEntity<?> getRedirect(String hash) throws URISyntaxException {
-        Redirects redirect=redirectService.getRedirect(hash);
-        URI uri = new URI(redirect.getHash());
+    public ResponseEntity<?> handleRedirect(@PathVariable String hash) throws URISyntaxException {
+        Redirects redirect = redirectService.getRedirect(hash);
+        URI uri = new URI(redirect.getLongUrl());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(uri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
