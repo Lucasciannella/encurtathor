@@ -14,11 +14,8 @@ public class SwaggerConfiguration {
     public OpenAPI publicApi() {
         return new OpenAPI()
                 .info(new Info().title("Encurtathor Api")
-                        .description("Encurtathor Project")
+                        .description("Encurtathor, api para encurtar links")
                         .version("v0.0.1")
-                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
-                .externalDocs(new ExternalDocumentation()
-                        .description("Spring wiki documentation")
-                        .url("https://springshop.wiki.github.org/docs"));
+                        .license(new License().name("Apache 2.0").url("http://springdoc.org")));
     }
 }
