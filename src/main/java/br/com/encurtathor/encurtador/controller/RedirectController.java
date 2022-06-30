@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Encurtathor Api")
+@CrossOrigin(originPatterns = "*")
 public class RedirectController {
 
     private final RedirectService redirectService;
