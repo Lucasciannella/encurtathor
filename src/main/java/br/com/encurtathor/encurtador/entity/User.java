@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.time.LocalDate;
 
 @Entity
@@ -23,7 +22,7 @@ public class User {
     @Column(name = "USER_NAME", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "E_MAIL", nullable = false)
+    @Column(name = "E_MAIL", nullable = false, unique = true)
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)

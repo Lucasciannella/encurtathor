@@ -3,11 +3,10 @@ package br.com.encurtathor.encurtador.service;
 import br.com.encurtathor.encurtador.dto.UserPostBody;
 import br.com.encurtathor.encurtador.entity.User;
 import br.com.encurtathor.encurtador.exception.BadRequestException;
+import br.com.encurtathor.encurtador.mapper.UserMapper;
 import br.com.encurtathor.encurtador.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -22,13 +21,6 @@ public class UserService {
     }
 
     public Optional<User> createUser(UserPostBody userPostBody) {
-        User user = User.builder()
-                .name(userPostBody.getName().trim())
-                .email(userPostBody.getEmail().trim())
-                .password(userPostBody.getPassword().trim())
-                .date(LocalDate.now())
-                .build();
-
-        return Optional.ofNullable(userRepository.save(user));
+        return Optional.ofNullable(userRepository.save(UserMapper.INSTANCE.toUser(userPostBody)));
     }
 }

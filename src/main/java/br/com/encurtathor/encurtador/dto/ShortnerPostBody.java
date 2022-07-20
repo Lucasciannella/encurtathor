@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class RedirectCreationRequest {
+public class ShortnerPostBody {
     @NotNull
     private String hash;
     @NotNull
