@@ -4,7 +4,6 @@ import br.com.encurtathor.encurtador.dto.ShortnerPostBody;
 import br.com.encurtathor.encurtador.entity.Shortner;
 import br.com.encurtathor.encurtador.exception.BadRequestException;
 import br.com.encurtathor.encurtador.exception.NotFoundException;
-import br.com.encurtathor.encurtador.mapper.RedirectMapper;
 import br.com.encurtathor.encurtador.repository.RedirectsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,12 @@ public class RedirectService {
         if (redirectsReposytory.existsByHash(shortnerPostBody.getHash())) {
             throw new BadRequestException("Hash Alredy exists");
         }
-        Shortner postRedirect = redirectsReposytory.save(RedirectMapper.INSTANCE.toShortner(shortnerPostBody));
+        Shortner shortner = Shortner.builder()
+                .hash(shortnerPostBody.getHash())
+                .longUrl(shortnerPostBody.getLongUrl())
+                .dateCreated(LocalDate.now())
+                .build();
+        Shortner postRedirect = redirectsReposytory.save(shortner);
 
         return Optional.ofNullable(postRedirect);
     }
