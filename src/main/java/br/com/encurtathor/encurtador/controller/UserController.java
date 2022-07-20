@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1/user")
 @RequiredArgsConstructor
-@Tag(name="Api encurtathor")
+@Tag(name="Criar Usuários")
 @CrossOrigin(originPatterns = "*")
 public class UserController {
 
