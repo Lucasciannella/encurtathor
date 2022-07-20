@@ -1,9 +1,10 @@
 package br.com.encurtathor.encurtador.service;
 
-import br.com.encurtathor.encurtador.dto.RedirectCreationRequest;
-import br.com.encurtathor.encurtador.entity.Redirects;
+import br.com.encurtathor.encurtador.dto.ShortnerPostBody;
+import br.com.encurtathor.encurtador.entity.Shortner;
 import br.com.encurtathor.encurtador.exception.BadRequestException;
 import br.com.encurtathor.encurtador.exception.NotFoundException;
+import br.com.encurtathor.encurtador.mapper.RedirectMapper;
 import br.com.encurtathor.encurtador.repository.RedirectsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,23 +18,17 @@ public class RedirectService {
 
     private final RedirectsRepository redirectsReposytory;
 
-    public Redirects getRedirect(String hash) {
-        Redirects redirect = redirectsReposytory.findByHash(hash).orElseThrow(() -> new NotFoundException("Don't have hash, try make do it"));
+    public Shortner getRedirect(String hash) {
+        Shortner redirect = redirectsReposytory.findByHash(hash).orElseThrow(() -> new NotFoundException("Don't have hash, try make do it"));
 
         return redirect;
     }
 
-    public Optional<Redirects> createRedirect(RedirectCreationRequest redirectCreationRequest) {
-        if (redirectsReposytory.existsByHash(redirectCreationRequest.getHash())) {
+    public Optional<Shortner> createRedirect(ShortnerPostBody shortnerPostBody) {
+        if (redirectsReposytory.existsByHash(shortnerPostBody.getHash())) {
             throw new BadRequestException("Hash Alredy exists");
         }
-        Redirects redirect = Redirects.builder()
-                .longUrl(redirectCreationRequest.getLongUrl())
-                .hash(redirectCreationRequest.getHash())
-                .dateCreated(LocalDate.now())
-                .build();
-
-        Redirects postRedirect = redirectsReposytory.save(redirect);
+        Shortner postRedirect = redirectsReposytory.save(RedirectMapper.INSTANCE.toShortner(shortnerPostBody));
 
         return Optional.ofNullable(postRedirect);
     }
