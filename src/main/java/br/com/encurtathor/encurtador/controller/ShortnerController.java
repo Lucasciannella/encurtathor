@@ -2,7 +2,7 @@ package br.com.encurtathor.encurtador.controller;
 
 import br.com.encurtathor.encurtador.dto.ShortnerPostBody;
 import br.com.encurtathor.encurtador.entity.Shortner;
-import br.com.encurtathor.encurtador.service.RedirectService;
+import br.com.encurtathor.encurtador.service.ShortnerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -21,21 +21,21 @@ import java.net.URISyntaxException;
 @CrossOrigin(originPatterns = "*")
 public class ShortnerController {
 
-    private final RedirectService redirectService;
+    private final ShortnerService shortnerService;
 
     @GetMapping("/{hash}")
     @Operation(summary = "Redirecionar para a url encurtada passando o hash criado")
     public ResponseEntity<?> handleRedirect(@PathVariable String hash) throws URISyntaxException {
-        Shortner redirect = redirectService.getRedirect(hash);
+        Shortner redirect = shortnerService.getRedirect(hash);
         URI uri = new URI(redirect.getLongUrl());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(uri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
     }
 
-    @PostMapping("/url/create")
+    @PostMapping("/url/shorten")
     @Operation(summary = "Encurtar Url criando o hash manualmente")
     public ResponseEntity<?> createRedirect(@Valid @RequestBody ShortnerPostBody shortnerPostBody) {
-        return new ResponseEntity(redirectService.createRedirect(shortnerPostBody), HttpStatus.CREATED);
+        return new ResponseEntity(shortnerService.createRedirect(shortnerPostBody), HttpStatus.CREATED);
     }
 }
