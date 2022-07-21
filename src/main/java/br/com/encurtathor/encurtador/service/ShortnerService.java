@@ -4,7 +4,7 @@ import br.com.encurtathor.encurtador.dto.ShortnerPostBody;
 import br.com.encurtathor.encurtador.entity.Shortner;
 import br.com.encurtathor.encurtador.exception.BadRequestException;
 import br.com.encurtathor.encurtador.exception.NotFoundException;
-import br.com.encurtathor.encurtador.repository.RedirectsRepository;
+import br.com.encurtathor.encurtador.repository.ShortnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +13,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class RedirectService {
+public class ShortnerService {
 
-    private final RedirectsRepository redirectsReposytory;
+    private final ShortnerRepository redirectsReposytory;
 
     public Shortner getRedirect(String hash) {
         Shortner redirect = redirectsReposytory.findByHash(hash).orElseThrow(() -> new NotFoundException("Don't have hash, try make do it"));

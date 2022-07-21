@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1/user")
 @RequiredArgsConstructor
-@Tag(name="Criar Usuários")
+@Tag(name = "Usuários")
 @CrossOrigin(originPatterns = "*")
 public class UserController {
 
@@ -23,13 +23,13 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca  o usuário pelo id")
-    public ResponseEntity<User> findById(@PathVariable Long id){
+    public ResponseEntity<User> findById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.findByIdOrThrowBadRequestException(id));
     }
 
     @PostMapping
     @Operation(summary = "Cria cadastro do usuário")
-    public ResponseEntity<?> createUser(@RequestBody @Valid UserPostBody userPostBody){
+    public ResponseEntity<?> createUser(@RequestBody @Valid UserPostBody userPostBody) {
         return new ResponseEntity(userService.createUser(userPostBody), HttpStatus.CREATED);
     }
 }

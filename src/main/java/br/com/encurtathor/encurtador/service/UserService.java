@@ -5,7 +5,6 @@ import br.com.encurtathor.encurtador.entity.User;
 import br.com.encurtathor.encurtador.exception.BadRequestException;
 import br.com.encurtathor.encurtador.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,9 +22,6 @@ public class UserService {
     }
 
     public Optional<User> createUser(UserPostBody userPostBody) {
-        if(userRepository.existsByEmail(userPostBody.getEmail())){
-            throw new BadRequestException("Email alredy Exist");
-        }
 
         User user = User.builder()
                 .name(userPostBody.getName().trim())
