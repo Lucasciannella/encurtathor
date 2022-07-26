@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ public class ShortnerService {
         return redirect;
     }
 
-    public Optional<Shortner> createRedirect(ShortnerPostBody shortnerPostBody) {
+    public Shortner createRedirect(ShortnerPostBody shortnerPostBody) {
         if (redirectsReposytory.existsByHash(shortnerPostBody.getHash())) {
             throw new BadRequestException("Hash Alredy exists");
         }
@@ -34,6 +33,6 @@ public class ShortnerService {
                 .build();
         Shortner postRedirect = redirectsReposytory.save(shortner);
 
-        return Optional.ofNullable(postRedirect);
+        return postRedirect;
     }
 }
