@@ -25,7 +25,7 @@ public class ShortnerController {
 
     @GetMapping("/{hash}")
     @Operation(summary = "Redirecionar para a url encurtada passando o hash criado")
-    public ResponseEntity<?> handleRedirect(@PathVariable String hash) throws URISyntaxException {
+    public ResponseEntity<Shortner> handleRedirect(@PathVariable String hash) throws URISyntaxException {
         Shortner redirect = shortnerService.getRedirect(hash);
         URI uri = new URI(redirect.getLongUrl());
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -35,7 +35,7 @@ public class ShortnerController {
 
     @PostMapping("/url/shorten")
     @Operation(summary = "Encurtar Url criando o hash manualmente")
-    public ResponseEntity<?> createRedirect(@Valid @RequestBody ShortnerPostBody shortnerPostBody) {
+    public ResponseEntity<Shortner> createRedirect(@Valid @RequestBody ShortnerPostBody shortnerPostBody) {
         return new ResponseEntity(shortnerService.createRedirect(shortnerPostBody), HttpStatus.CREATED);
     }
 }

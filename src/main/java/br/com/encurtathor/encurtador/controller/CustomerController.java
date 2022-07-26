@@ -1,8 +1,8 @@
 package br.com.encurtathor.encurtador.controller;
 
-import br.com.encurtathor.encurtador.dto.UserPostBody;
-import br.com.encurtathor.encurtador.entity.User;
-import br.com.encurtathor.encurtador.service.UserService;
+import br.com.encurtathor.encurtador.dto.CustomerPostBody;
+import br.com.encurtathor.encurtador.entity.Customer;
+import br.com.encurtathor.encurtador.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -17,19 +17,19 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Tag(name = "Usuários")
 @CrossOrigin(originPatterns = "*")
-public class UserController {
+public class CustomerController {
 
-    private final UserService userService;
+    private final CustomerService customerService;
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca  o usuário pelo id")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(userService.findByIdOrThrowBadRequestException(id));
+    public ResponseEntity<Customer> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(customerService.findByIdOrThrowBadRequestException(id));
     }
 
     @PostMapping
     @Operation(summary = "Cria cadastro do usuário")
-    public ResponseEntity<?> createUser(@RequestBody @Valid UserPostBody userPostBody) {
-        return new ResponseEntity(userService.createUser(userPostBody), HttpStatus.CREATED);
+    public ResponseEntity<Customer> createUser(@RequestBody @Valid CustomerPostBody customerPostBody) {
+        return new ResponseEntity(customerService.createUser(customerPostBody), HttpStatus.CREATED);
     }
 }
