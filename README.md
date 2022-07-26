@@ -19,13 +19,13 @@ Fala galera! Apresento a vocês o  encurtador de url Encurtathor.
 
     
 
-  - Temos dois métodos nesse projeto, um para criar a Url encurtada e outro para redirecionar. Como ainda não temos o Frontend do projeto para usar dos métodos você precisa do postman ou algum programa similar para passar os parâmetros no corpo da requisição:![image-20220623151125708](C:\Users\Lucas\Desktop\LTDA\encurtathor\midia\image-20220623151125708.png)
+  - Temos dois métodos nesse projeto, um para criar a Url encurtada e outro para redirecionar. Como ainda não temos o Frontend do projeto para usar dos métodos você precisa do postman ou algum programa similar para passar os parâmetros no corpo da requisição:![image-20220623151125708](https://www.flickr.com/photos/196142827@N02/52243009236/in/dateposted-public/)
 
   - 
 
     
 
-  - E para acessar sua url encurtada você ira usar o domínio local com o hash que você criou:![image-20220623152415465](C:\Users\Lucas\Desktop\LTDA\encurtathor\midia\image-20220623152415465.png)
+  - E para acessar sua url encurtada você ira usar o domínio local com o hash que você criou:![https://www.flickr.com/photos/196142827@N02/52243009921/in/dateposted-public/)
   
     
     
