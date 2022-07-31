@@ -17,14 +17,14 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Encurtador")
+@Tag(name = "Shortner")
 @CrossOrigin(originPatterns = "*")
 public class ShortnerController {
 
     private final ShortnerService shortnerService;
 
     @GetMapping("/{hash}")
-    @Operation(summary = "Redirecionar para a url encurtada passando o hash criado")
+    @Operation(summary = "Using the crated hash to redirect the original URL")
     public ResponseEntity<Shortner> handleRedirect(@PathVariable String hash) throws URISyntaxException {
         Shortner redirect = shortnerService.getRedirect(hash);
         URI uri = new URI(redirect.getLongUrl());
@@ -34,7 +34,7 @@ public class ShortnerController {
     }
 
     @PostMapping("/url/shorten")
-    @Operation(summary = "Encurtar Url criando o hash manualmente")
+    @Operation(summary = "Shorten URL with manual hash creation")
     public ResponseEntity<Shortner> createRedirect(@Valid @RequestBody ShortnerPostBody shortnerPostBody) {
         return new ResponseEntity(shortnerService.createRedirect(shortnerPostBody), HttpStatus.CREATED);
     }

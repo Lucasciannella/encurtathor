@@ -19,7 +19,7 @@ public class Customer {
     @Column(name = "USER_ID")
     private Long id;
 
-    @Column(name = "USER_NAME", length = 50, nullable = false)
+    @Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
     private String name;
 
     @Column(name = "E_MAIL", nullable = false, unique = true)
