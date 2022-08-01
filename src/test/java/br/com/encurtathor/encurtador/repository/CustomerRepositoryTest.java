@@ -1,5 +1,6 @@
 package br.com.encurtathor.encurtador.repository;
 
+import br.com.encurtathor.encurtador.Util.UserCreator;
 import br.com.encurtathor.encurtador.entity.Customer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +19,7 @@ class CustomerRepositoryTest {
     @Test
     @DisplayName("Save creates Customers when successful ")
     void save_peristence_whenSuccessful() {
-        Customer customerToBeSaved = createCustomer();
+        Customer customerToBeSaved = UserCreator.createUserToBeSaved();
 
         Customer savedCustomer = this.customerRepository.save(customerToBeSaved);
 
@@ -28,14 +29,5 @@ class CustomerRepositoryTest {
         Assertions.assertThat(savedCustomer.getEmail()).isEqualTo(customerToBeSaved.getEmail());
         Assertions.assertThat(savedCustomer.getPassword()).isEqualTo(customerToBeSaved.getPassword());
         Assertions.assertThat(savedCustomer.getDate()).isEqualTo(customerToBeSaved.getDate());
-    }
-
-    private Customer createCustomer() {
-        return Customer.builder()
-                .name("Lucas")
-                .email("Lucas@gmail.com")
-                .password("XR23131")
-                .date(LocalDate.now())
-                .build();
     }
 }
