@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    container_name: encurtathor
+    environment:
+      MYSQL_ROO_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - encurtathor_data:/var/lib/mysql
+volumes:
+  encurtathor_data:
